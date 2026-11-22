@@ -99,6 +99,8 @@ quarto publish gh-pages       # เผยแพร่เว็บ
   (`GoogleSans-Regular.ttf`) ส่วนเว็บและ ggplot ใช้ชื่อระบบ `"Google Sans"`
 - `Path=` ของฟอนต์ PDF และ `url()` ใน `custom.scss` นับจากรากโปรเจกต์ (`_extensions/kanthjs/thai-book/fonts/`)
   ถ้าติดตั้ง extension ไว้ที่ `_extensions/thai-book/` (ไม่มีชื่อ org) ต้องแก้ทั้งสองที่
+- `Path=` ต้องเขียนเป็น raw LaTeX `` "`Path=./_extensions/...`{=latex}" `` ไม่อย่างนั้น Pandoc แปลง `_` เป็น `\_`
+  แล้ว XeLaTeX ล่มที่ `\setmainfont` ("Missing \begin{document}")
 - ห้ามใส่การอ้างอิง `@key` ในเชิงอรรถ `^[...]` เพราะ `citation-location: margin` จะซ้อนรายการอ้างอิงใน sidenote
   แล้ว LaTeX ล่ม ("There's no line here to end") ให้วาง `[@key]` ไว้ในประโยคหลักแทน
 - ไฟล์ `GoogleSans-Regular.ttf` และ `-Bold.ttf` ที่แตกจาก variable font มี PostScript name ซ้ำกัน
