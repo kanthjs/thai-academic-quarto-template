@@ -93,6 +93,9 @@ quarto publish gh-pages       # เผยแพร่เว็บ
 - `_extensions/kanthjs/thai-book/preamble.tex` ตั้ง `\XeTeXlinebreaklocale "th"` ไว้ตัดคำไทย อย่าลบ
 - ชื่อเฉพาะหรือคำทับศัพท์ที่ตัดบรรทัดผิดที่: แก้เฉพาะจุดด้วย `\mbox{...}` (เฉพาะ PDF) หรือใส่ zero-width space (U+200B)
 - ห้ามเปลี่ยน pdf-engine เป็น pdflatex (ไม่รองรับฟอนต์ไทยแบบ Unicode)
+- render ต้องใช้ชื่อ format ของ extension คือ `--to thai-book-pdf` หรือ `--to thai-book-html`
+  `--to pdf` หรือ `--to html` จะได้ format พื้นฐานของ Quarto ที่ไม่มีค่าใน extension เลย (ฟอนต์, ป้าย crossref ภาษาไทย, `dev: ragg_png`)
+  อาการคือ PDF ล้มด้วย `invalid font type` ที่กราฟแรกที่ใช้ Google Sans เพราะ knitr กลับไปใช้ device `pdf`
 - ยังไม่ใช้ Typst สำหรับ PDF เพราะการตัดคำไทยยังไม่นิ่ง (สถานะ ณ พ.ย. 2026) ทบทวนได้ในอนาคต
 - ก่อนส่งโรงพิมพ์: ตรวจว่าทุกฟอนต์ embedded ด้วย `pdffonts _book/*.pdf` หรือ `pdftools::pdf_fonts()` ใน R
 - ชื่อฟอนต์ PDF ใน extension คือ `"GoogleSans"` (ไม่มีวรรค) เพราะเมื่อมี `Path=` fontspec ใช้ชื่อนี้เป็นชื่อไฟล์

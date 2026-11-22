@@ -60,6 +60,9 @@ quarto render --to thai-book-pdf   # PDF only
 
 ## ข้อควรรู้ / Gotchas
 
+- ใช้ `--to thai-book-pdf` / `--to thai-book-html` เสมอ `--to pdf` หรือ `--to html` จะข้าม extension ทั้งหมด
+  (ฟอนต์ ป้ายภาษาไทย และ `dev: ragg_png`) แล้วกราฟที่ใช้ Google Sans จะล้มด้วย `invalid font type`
+  Always render with the extension format names; plain `--to pdf`/`--to html` bypass the extension.
 - path ของฟอนต์ (`Path=` ใน `_extension.yml` และ `url()` ใน `custom.scss`) นับจากรากโปรเจกต์
   และเขียนไว้เป็น `_extensions/kanthjs/thai-book/fonts/` ถ้าย้าย extension ไปที่อื่นต้องแก้ทั้งสองที่
   Font paths are relative to the project root; update both if you move the extension.
