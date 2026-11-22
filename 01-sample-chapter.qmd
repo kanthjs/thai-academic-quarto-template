@@ -1,0 +1,52 @@
+# บทตัวอย่าง {#sec-sample}
+
+<!-- บทนี้มีไว้สาธิตรูปแบบ ลบหรือแทนด้วยบทจริงได้เลย -->
+
+ภาษาไทยไม่มีช่องว่างระหว่างคำ ฉบับ PDF จึงตัดคำด้วยพจนานุกรมของ XeTeX ผ่านคำสั่ง `\XeTeXlinebreaklocale "th"` ใน `preamble.tex` ของ extension ย่อหน้านี้ยาวพอให้เห็นว่าบรรทัดตัดตรงรอยต่อคำ ไม่ล้นขอบกระดาษ และไม่ตัดกลางพยางค์
+
+## สมการ {#sec-sample-equation}
+
+การเติบโตแบบ logistic เขียนเป็นสมการเชิงอนุพันธ์ได้ดัง @eq-logistic
+
+$$
+\frac{dy}{dt} = r\,y\,(1 - y)
+$$ {#eq-logistic}
+
+เมื่อ $y$ คือสัดส่วนของประชากรที่เปลี่ยนสถานะ ($0 < y < 1$) $t$ คือเวลา และ $r$ คืออัตราสัมพัทธ์ต่อหน่วยเวลา
+
+## รูปที่มีคำบรรยายที่ขอบ {#sec-sample-figure}
+
+@fig-logistic วาดคำตอบของ @eq-logistic ด้วยข้อมูลสมมติ คำบรรยายรูปจะไปอยู่ที่ขอบขวาทั้งในเว็บและ PDF
+แม่แบบ R Markdown และ Quarto มีที่มาจากระบบ R Markdown [@xie2018rmarkdown]
+
+```{r}
+#| label: fig-logistic
+#| fig-cap: "Logistic curves for two rates (hypothetical values, y0 = 0.01)."
+#| fig-width: 6
+#| fig-height: 3.6
+logistic <- function(t, r, y0 = 0.01) 1 / (1 + (1 / y0 - 1) * exp(-r * t))
+t <- seq(0, 40, by = 0.5)
+plot(t, logistic(t, r = 0.3), type = "l", lty = 1, ylim = c(0, 1),
+     xlab = "Time", ylab = "Proportion y", family = "sans")
+lines(t, logistic(t, r = 0.15), lty = 2)
+legend("bottomright", legend = c("r = 0.30", "r = 0.15"), lty = 1:2, bty = "n")
+```
+
+ถ้าใช้ ggplot2 ให้ตั้ง `theme_minimal(base_family = "Google Sans")` และแยกกลุ่มด้วย linetype หรือ shape เพื่อให้พิมพ์ขาวดำได้
+
+## ไดอะแกรม {#sec-sample-diagram}
+
+```{mermaid}
+%%| label: fig-workflow
+%%| fig-cap: "Writing workflow for a book built with this template."
+flowchart LR
+  A[Draft .qmd] --> B[quarto render]
+  B --> C[HTML site]
+  B --> D[PDF for print]
+```
+
+ข้อความที่ขอบใช้ `.column-margin` ได้ตามต้องการ^[เชิงอรรถจะไปอยู่ที่ขอบขวาอัตโนมัติ ห้ามใส่การอ้างอิงในเชิงอรรถเพราะ LaTeX จะล่ม]
+
+::: {.column-margin}
+กล่องนี้อยู่ที่ขอบขวา
+:::

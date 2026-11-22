@@ -1,0 +1,16 @@
+/.quarto/
+/_book/
+*_cache/
+*_files/
+*.tex
+!_extensions/**/*.tex
+*.log
+*.aux
+*.toc
+.Rhistory
+.RData
+.Rproj.user/
+.DS_Store
+Thumbs.db
+**/*.quarto_ipynb
+/site_libs/

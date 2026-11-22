@@ -1,0 +1,32 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "ชื่อหนังสือ"
+  subtitle: "ชื่อรอง (ถ้ามี)"
+  author: "ชื่อผู้เขียน"
+  date: today
+  date-format: "D MMMM YYYY"
+  # repo-url: https://github.com/<user>/<repo>
+  # repo-actions: [edit, issue]
+  downloads: [pdf]          # ปุ่มดาวน์โหลด PDF บนฉบับเว็บ
+  search: true
+  page-navigation: true
+  sidebar:
+    style: docked
+    collapse-level: 1
+  chapters:
+    - index.qmd
+    - 01-sample-chapter.qmd
+    - references.qmd
+  appendices:
+    - appendix-glossary.qmd
+
+bibliography: references.bib
+
+# รูปแบบเล่มทั้งหมดอยู่ใน _extensions/kanthjs/thai-book/_extension.yml
+# ค่าที่ใส่ใต้ format ด้านล่างจะทับค่าใน extension เฉพาะเล่มนี้
+format:
+  thai-book-html: default
+  thai-book-pdf: default

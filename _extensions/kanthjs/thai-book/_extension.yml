@@ -1,0 +1,96 @@
+# ---------------------------------------------------------------
+# thai-book — Quarto format extension สำหรับตำราวิชาการภาษาไทย
+# ใช้ใน _quarto.yml ของเล่ม:
+#   format:
+#     thai-book-html: default
+#     thai-book-pdf: default
+# ค่าที่ตั้งในเล่มจะทับค่าในไฟล์นี้ (เช่น เปลี่ยน toc-depth เฉพาะเล่ม)
+# ---------------------------------------------------------------
+title: Thai Book
+author: กันต์ธณวิชญ์ ใจสงฆ์
+version: 0.1.0
+# mermaid ใน PDF ต้องใช้ headless Chrome ของ Quarto 1.9+ (Quarto 1.3 ทำ Chrome รุ่นใหม่ล่ม)
+quarto-required: ">=1.9.0"
+contributes:
+  formats:
+    # ---------- ใช้ร่วมกันทั้งเว็บและ PDF ----------
+    common:
+      # เลย์เอาต์ขอบกว้าง (Tufte / socviz)
+      reference-location: margin   # เชิงอรรถไปอยู่ขอบขวา
+      citation-location: margin    # ห้ามใส่ @key ในเชิงอรรถ ^[...] (LaTeX ล่ม)
+      fig-cap-location: margin
+      # ตาราง: \sidecaption ใช้ใน longtable ของ PDF ไม่ได้ (Misplaced \noalign)
+      tbl-cap-location: top
+      number-sections: true
+      toc: true
+      crossref:
+        fig-title: "รูปที่"
+        tbl-title: "ตารางที่"
+        eq-prefix: "สมการ"
+        fig-prefix: "รูปที่"
+        tbl-prefix: "ตารางที่"
+        sec-prefix: "หัวข้อ"
+        chapters: true
+      # ragg วาดกราฟ: device png ปกติของ Windows หา Google Sans ไม่เจอ แต่ ragg/systemfonts เจอ
+      knitr:
+        opts_chunk:
+          dev: "ragg_png"
+
+    # ---------- ฉบับออนไลน์ ----------
+    html:
+      theme:
+        light: [cosmo, custom.scss]
+        dark:  [cosmo, custom.scss, custom-dark.scss]
+      mainfont: "Google Sans"
+      toc-location: right
+      toc-title: "ในบทนี้"
+      code-link: true
+      code-copy: true
+      reader-mode: true
+      html-math-method: mathjax
+      grid:
+        sidebar-width: 260px
+        body-width: 760px
+        margin-width: 300px
+
+    # ---------- ฉบับพิมพ์ (XeLaTeX) ----------
+    pdf:
+      pdf-engine: xelatex          # ห้ามใช้ pdflatex (ไม่รองรับฟอนต์ไทย Unicode)
+      documentclass: scrbook
+      classoption: [twoside, openright]
+      papersize: a4
+      geometry:
+        - inner=25mm
+        - top=25mm
+        - bottom=25mm
+        - textwidth=115mm
+        - marginparsep=7mm
+        - marginparwidth=48mm
+      fontsize: 11pt
+      linestretch: 1.45
+      # fontspec ใช้ชื่อนี้เป็นชื่อไฟล์เมื่อมี Path= จึงต้องเป็น "GoogleSans" (ไม่มีวรรค)
+      # Path= นับจากรากโปรเจกต์ (ที่ XeLaTeX รัน) (quarto add / use template ติดตั้งไว้ที่ _extensions/kanthjs/thai-book/)
+      mainfont: "GoogleSans"
+      mainfontoptions: &googlesans
+        # raw LaTeX: ไม่อย่างนั้น Pandoc จะ escape "_" เป็น "\_" แล้ว fontspec หา path ไม่เจอ
+        - "`Path=./_extensions/kanthjs/thai-book/fonts/`{=latex}"
+        - Extension=.ttf
+        - UprightFont=*-Regular
+        - BoldFont=*-Bold
+        - ItalicFont=*-Italic
+        - BoldItalicFont=*-Bold
+      sansfont: "GoogleSans"
+      sansfontoptions: *googlesans
+      # DejaVu Sans Mono และ Latin Modern Math มากับ TinyTeX (tlmgr: dejavu, lm-math)
+      monofont: "DejaVuSansMono"
+      monofontoptions:
+        - Extension=.ttf
+        - BoldFont=*-Bold
+        - ItalicFont=*-Oblique
+        - BoldItalicFont=*-BoldOblique
+        - Scale=MatchLowercase
+      mathfont: "latinmodern-math.otf"
+      toc-depth: 2
+      colorlinks: true
+      include-in-header: preamble.tex   # \XeTeXlinebreaklocale "th" ตัดคำไทย อย่าลบ
+      keep-tex: true
