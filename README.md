@@ -73,4 +73,5 @@ quarto render --to thai-book-pdf   # PDF only
 
 ## สัญญาอนุญาต / License
 
-ฟอนต์ Google Sans ใช้สัญญาอนุญาต SIL Open Font License 1.1 (`_extensions/kanthjs/thai-book/fonts/OFL.txt`)
+โค้ดและการตั้งค่าของแม่แบบใช้สัญญาอนุญาต MIT (ดู `LICENSE`) ส่วนฟอนต์ Google Sans ใช้ SIL Open Font License 1.1 (`_extensions/kanthjs/thai-book/fonts/OFL.txt`)
+The template code and configuration are MIT-licensed (see `LICENSE`); the Google Sans fonts are under the SIL OFL 1.1.
