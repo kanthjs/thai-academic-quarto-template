@@ -93,4 +93,6 @@ contributes:
       toc-depth: 2
       colorlinks: true
       include-in-header: preamble.tex   # \XeTeXlinebreaklocale "th" ตัดคำไทย อย่าลบ
+      filters:
+        - no-hr-pdf.lua                 # ไม่พิมพ์เส้นคั่น --- (ยังแสดงในเว็บ)
       keep-tex: true
