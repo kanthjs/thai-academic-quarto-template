@@ -29,3 +29,10 @@
 %    ปรับตัวเลขตามรสนิยมได้เลย
 \setlength{\parindent}{1.5em}
 \setlength{\parskip}{0.3em plus 0.1em}
+
+% 6) ตัดบรรทัดโค้ดและผลลัพธ์ R ที่ยาวเกินกรอบ (ไม่อย่างนั้นจะล้นขอบขวาแล้วหายไปในฉบับพิมพ์)
+%    Highlighting = โค้ดที่ไฮไลต์, verbatim = ผลลัพธ์ของ chunk
+%    ลูกศรที่ขอบขวาบอกผู้อ่านว่าบรรทัดนี้ต่อจากบรรทัดบน
+\usepackage{fvextra}
+\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines,breakanywhere}
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere}
